@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import React, { useState } from 'react';
 import '../../assets/css/style.css'
 
@@ -40,6 +41,10 @@ const App = () => {
 
     return (
         <div className='container'>
+            <Helmet>
+                <title>Graphbook - Feed</title>
+                <meta name='description' content='newsfeed of all yout friend on graphbook' />
+            </Helmet>
             <div className='postForm'>
                 <form onSubmit={handleSubmit}>
                     <textarea value={postContent} onChange={(e) => setPostContent(e.target.value)}
