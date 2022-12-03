@@ -6,16 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "webpack serve --devtool inline-source-map --hot --config webpack.client.config.js",
-    "client:build": "webpack --config webpack.client.build.config"
+    "client:build": "webpack --config webpack.client.build.config",
+    "server": "nodemon --exec babel-node --watch src/server src/server/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "babel-loader": "^9.1.0",
