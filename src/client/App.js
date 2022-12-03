@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../assets/css/style.css'
 
-const initialPost = [
+const initialPosts = [
     {
         id: 2,
         text: 'lorem ipsum',
@@ -21,13 +21,36 @@ const initialPost = [
 ];
 
 const App = () => {
-    const [post, setPosts] = useState(initialPost);
-    
+    const [posts, setPosts] = useState(initialPosts);
+    const [postContent, setPostContent] = useState('');
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const newPost = {
+            id: posts.length + 1,
+            text: postContent,
+            user: {
+                avatar: '/uploads/avatar1.png',
+                username: 'fake user'
+            }
+        }
+        setPosts([newPost, ...posts]);
+        setPostContent('');
+    }
+
     return (
         <div className='container'>
+            <div className='postForm'>
+                <form onSubmit={handleSubmit}>
+                    <textarea value={postContent} onChange={(e) => setPostContent(e.target.value)}
+                        placeholder="write your post!"
+                    />
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
             <div className='feed'>
-                { initialPost.map( (post, i) => 
-                    <div key= {post.id} className="post" >
+                {posts.map((post, i) =>
+                    <div key={post.id} className="post" >
                         <div className='header'>
                             <img src={post.user.avatar} />
                             <h2>{post.user.username}</h2>
