@@ -18,6 +18,10 @@ app.use(helmet.contentSecurityPolicy({
 }));
 app.use(helmet.referrerPolicy({ policy: 'same-origin'}));
 
+app.use(compres());
+
+app.use(cors());
+
 app.use('/', express.static(path.join(root, 'dist/client')));
 app.use('/uploads', express.static(path.join(root, 'public/uploads')));
 app.get('/', (req, res) => {
