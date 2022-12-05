@@ -3,11 +3,15 @@ import path from 'path';
 import helmet from 'helmet';
 import cors from 'cors';
 import compres from 'compression';
-import services from "./services";
+import servicesLoader from "./services";
 import db from "./database";
 
 const app = express();
 const root = path.join(__dirname, '../../');
+const utils = {
+    db,
+}
+const services = servicesLoader(utils);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(helmet());
