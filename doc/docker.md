@@ -12,6 +12,12 @@
     docker exec -ti graphbook-mysql-1 mysql -p graphbook
     ```
 
+    create database
+
+    ```sql
+    CREATE DATABASE graphbook CHARACTER SET utf8 COLLATE utf8_general_ci;
+    ```
+
     grant to devuser 
 
     ```sql
