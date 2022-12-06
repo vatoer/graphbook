@@ -32,3 +32,15 @@ you can go back to a specific timestamp:
 ```
 sequelize db:migrate:undo:all --to XXXXXXXXXXXXXX-create-posts.js --migrations-path src/server/migrations --config src/server/config/index.js
 ```
+
+Seeding foreign key data
+```
+sequelize seed:generate --name fake-users --seeders-path src/server/seeders
+```
+
+The following command will undo
+all the seeds
+
+```
+sequelize db:seed:undo:all --seeders-path src/server/seeders --config src/server/config/index.js
+```
