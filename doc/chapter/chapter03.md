@@ -44,3 +44,8 @@ all the seeds
 ```
 sequelize db:seed:undo:all --seeders-path src/server/seeders --config src/server/config/index.js
 ```
+
+rerun seed
+```
+sequelize db:seed:all --seeders-path src/server/seeders --config src/server/config/index.js
+```

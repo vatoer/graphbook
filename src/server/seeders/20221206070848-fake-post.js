@@ -12,23 +12,24 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Posts', [
-      {
-        text: 'lorem ipsum 1',
+
+    return queryInterface.sequelize.query(
+      'SELECT id from Users;',
+    ).then((users) => {
+      const usersRows = users[0];
+      return queryInterface.bulkInsert('Posts', [{
+        text: 'Lorem ipsum 1',
+        userId: usersRows[0].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        text: 'lorem ipsum 2',
+        text: 'Lorem ipsum 2',
+        userId: usersRows[1].id,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },
-      {
-        text: 'lorem ipsum 3',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }
-    ])
+      }], {});
+    });
   },
 
   async down(queryInterface, Sequelize) {
@@ -38,6 +39,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('Posts', null, {});
+    await queryInterface.bulkDelete('Posts', null, {});
   }
 };
