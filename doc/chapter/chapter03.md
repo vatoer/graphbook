@@ -73,3 +73,18 @@ sequelize model:generate --models-path src/server/models --migrations-path src/s
 ```
 sequelize db:migrate --migrations-path src/server/migrations --config src/server/config/index.js
 ```
+
+seeding many to many data
+```
+sequelize seed:generate --name fake-chats --seeders-path src/server/seeders
+```
+
+seed users_chats
+```
+sequelize seed:generate --name fake-chats-users-relations --seeders-path src/server/seeders
+```
+
+seed fake message
+```
+sequelize seed:generate --name fake-messages --seeders-path src/server/seeders
+```
