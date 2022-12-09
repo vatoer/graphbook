@@ -82,6 +82,19 @@ export default function resolvers() {
                     });
                 });
             },
+            addChat(root, { chat }, context) {
+                return Chat.create().then((newChat) => {
+                    return Promise.all([
+                        newChat.setUsers(chat.users),
+                    ]).then(() => {
+                        logger.log({
+                            level: 'info',
+                            message: 'Message was Created',
+                        });
+                        return newChat;
+                    });
+                });
+            },
         },
     };
 
