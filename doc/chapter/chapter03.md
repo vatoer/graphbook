@@ -49,3 +49,18 @@ rerun seed
 ```
 sequelize db:seed:all --seeders-path src/server/seeders --config src/server/config/index.js
 ```
+
+chat model
+```
+sequelize model:generate --models-path src/server/models --migrations-path src/server/migrations --name Chat --attributes firstName:string, lastName:string,email:string
+```
+
+Generate the migration for our association table, as follows:
+```
+sequelize migration:create --migrations-path src/server/migrations --name create-user-chats
+```
+
+rerun migrations
+```
+sequelize db:migrate --migrations-path src/server/migrations --config src/server/config/index.js
+```
