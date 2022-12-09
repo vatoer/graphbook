@@ -49,6 +49,16 @@ export default function resolvers() {
                     });
                 });
             },
+            chat(root, { chatId }, context){
+                return Chat.findByPk(chatId, {
+                    include:[{
+                        model: User,
+                        required: true,
+                    },{
+                        model: Message,
+                    }]
+                })
+            }
         },
         RootMutation: {
             addPost(root, {
