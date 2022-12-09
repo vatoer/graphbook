@@ -64,3 +64,12 @@ rerun migrations
 ```
 sequelize db:migrate --migrations-path src/server/migrations --config src/server/config/index.js
 ```
+
+message mode 
+```
+sequelize model:generate --models-path src/server/models --migrations-path src/server/migrations --name Message --attributes text:string,userId:integer,chatId:integer
+```
+
+```
+sequelize db:migrate --migrations-path src/server/migrations --config src/server/config/index.js
+```
