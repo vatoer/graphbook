@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client";
 import { ApolloClient, InmMemoryCache, from, HttpLink, InMemoryCache } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 
@@ -21,5 +22,20 @@ const client = new ApolloClient({
     ]),
     cache: new InMemoryCache(),
 });
+
+client.query({
+    query: gql `
+    {
+        posts {
+            id
+            text
+            user {
+                avatar
+                username
+            }
+        }
+    }
+    `
+}).then( result => console.log(result));
 
 export default client;
