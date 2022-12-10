@@ -43,6 +43,11 @@ const typeDefinitions = `
         users: [Int]
     }
 
+    input MessageInput {
+        text: String!
+        chatId: Int!
+    }
+
     type RootMutation {
         addPost (
             post: PostInput!
@@ -50,6 +55,9 @@ const typeDefinitions = `
         addChat (
             chat: ChatInput!
         ): Chat
+        addMessage (
+            message: MessageInput!
+        ): Message
     }
 
     schema {
