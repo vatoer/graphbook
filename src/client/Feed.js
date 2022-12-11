@@ -1,27 +1,21 @@
 import React, { useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
 
-const initialPosts = [
-    {
-        id: 2,
-        text: 'lorem ipsum',
-        user: {
-            avatar: '/uploads/avatar1.png',
-            username: 'test user'
-        }
-    },
-    {
-        id: 1,
-        text: 'Lorem ipsum',
-        user: {
-            avatar: '/uploads/avatar2.png',
-            username: 'Test User 2'
+const GET_POSTS = gql`
+{
+    posts {
+        id
+        text
+        user {
+            avatar
+            username
         }
     }
-];
+}`;
 
 const Feed = () => {
-    const [posts, setPosts] = useState(initialPosts);
     const [postContent, setPostContent] = useState('');
+    const { loading, error, data } = useQuery(GET_POSTS);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,9 +27,13 @@ const Feed = () => {
                 username: 'fake user'
             }
         }
-        setPosts([newPost, ...posts]);
+        //setPosts([newPost, ...posts]);
         setPostContent('');
     }
+
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+    const { posts } = data;
 
     return (
         <div className='container'>
