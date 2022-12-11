@@ -28,7 +28,9 @@ mutation addPost($post : PostInput!) {
 const Feed = () => {
     const [postContent, setPostContent] = useState('');
     const { loading, error, data } = useQuery(GET_POSTS);
-    const [addPost] = useMutation(ADD_POST);
+    const [addPost] = useMutation(ADD_POST, {
+        refetchQueries: [{query:GET_POSTS}]
+    });
 
     const handleSubmit = (event) => {
         event.preventDefault();
