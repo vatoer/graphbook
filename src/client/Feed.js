@@ -29,6 +29,19 @@ const Feed = () => {
     const [postContent, setPostContent] = useState('');
     const { loading, error, data } = useQuery(GET_POSTS);
     const [addPost] = useMutation(ADD_POST, {
+        optimisticResponse: {
+            __typename: "mutation",
+            addPost:{
+                __typename: "Post",
+                text: postContent,
+                id: -1,
+                user: {
+                    __typename: "User",
+                    username: "Loading...",
+                    avatar: "/public/loading.gif"
+                }
+            }
+        },
         update(cache, { data: { addPost }}) {
             cache.modify({
                 fields: {
@@ -71,7 +84,7 @@ const Feed = () => {
             </div>
             <div className='feed'>
                 {posts.map((post, i) =>
-                    <div key={post.id} className="post" >
+                    <div key={post.id} className={'post '+ (post.id < 0 ? 'optimistic':'')} >
                         <div className='header'>
                             <img src={post.user.avatar} />
                             <h2>{post.user.username}</h2>
