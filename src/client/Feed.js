@@ -30,9 +30,22 @@ const Feed = () => {
     const { loading, error, data } = useQuery(GET_POSTS);
     const [addPost] = useMutation(ADD_POST, {
         update(cache, { data: { addPost }}) {
-            const data = cache.readQuery( {query: GET_POSTS});
-            const newData = { posts: [addPost, ...data.posts]};
-            cache.writeQuery({ query: GET_POSTS, data: newData});
+            cache.modify({
+                fields: {
+                    posts(existingPosts = []) {
+                        const newPostRef = cache.writeFragment({
+                            data: addPost,
+                            fragment: gql`
+                                fragment NewPost on Post {
+                                    id
+                                    type
+                                }
+                            `
+                        });
+                        return [newPostRef, ...existingPosts];
+                    }
+                }
+            })
         }
     });
 
